@@ -23,7 +23,7 @@
     "legacy:build": "npx cp -r 'legacy/' 'www/'",
     "privacy:build": "npx cp 'src/assets/privacypolicy.html' 'www/'",
     "robots:build": "npx cp 'src/assets/robots.txt' 'www/'",
-    "docs": "npx cp -r 'www/' 'docs/'"
+    "docs": "npm run build && npx cp -r 'www/' 'docs/'"
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor"
