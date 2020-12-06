@@ -41,7 +41,7 @@ export default class App extends Component {
     this.changeLayout();
 
     this.setState({
-      layout: {}
+      layout: {},
     });
   }
 
@@ -49,7 +49,7 @@ export default class App extends Component {
     // Subscribe to changes
     const pubxLayoutSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.LAYOUT_KEY,
-      newState => {
+      (newState) => {
         // First check if expanded is not the current state
         const oldExpanded = this.state.layout.expanded;
 
@@ -59,9 +59,9 @@ export default class App extends Component {
           ...this.state,
           layout: {
             ...this.state.layout,
-            ...newState
+            ...newState,
           },
-          touchpadKey: this.getNewTouchpadKey()
+          touchpadKey: this.getNewTouchpadKey(),
         });
 
         if (oldExpanded !== newState.expanded) {
@@ -72,13 +72,13 @@ export default class App extends Component {
 
     const pubxSettingsSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.VAPORBOY_OPTIONS_KEY,
-      newState => {
+      (newState) => {
         this.setState({
           ...this.state,
           options: {
             ...this.state.options,
-            ...newState
-          }
+            ...newState,
+          },
         });
 
         this.updateOptionsClasses();
@@ -87,14 +87,14 @@ export default class App extends Component {
 
     this.setState({
       layout: {
-        ...Pubx.get(PUBX_CONFIG.LAYOUT_KEY)
+        ...Pubx.get(PUBX_CONFIG.LAYOUT_KEY),
       },
       options: {
-        ...Pubx.get(PUBX_CONFIG.VAPORBOY_OPTIONS_KEY)
+        ...Pubx.get(PUBX_CONFIG.VAPORBOY_OPTIONS_KEY),
       },
       pubxLayoutSubscriberKey,
       pubxSettingsSubscriberKey,
-      touchpadKey: this.getNewTouchpadKey()
+      touchpadKey: this.getNewTouchpadKey(),
     });
 
     // Updated the options clases
@@ -107,25 +107,23 @@ export default class App extends Component {
   }
 
   initialize3p() {
-    const loadScript = require("load-script");
-
+    // const loadScript = require("load-script");
     // Setup Google Analytics
-    loadScript(
-      "https://www.googletagmanager.com/gtag/js?id=UA-125157178-1",
-      function(err, script) {
-        if (!err) {
-          window.dataLayer = window.dataLayer || [];
-          function gtag() {
-            window.dataLayer.push(arguments);
-          }
-          gtag("js", new Date());
-          gtag("config", "UA-125157178-1");
-
-          // Add analytics to window
-          window.gtag = gtag;
-        }
-      }
-    );
+    // loadScript(
+    //   "https://www.googletagmanager.com/gtag/js?id=UA-125157178-1",
+    //   function(err, script) {
+    //     if (!err) {
+    //       window.dataLayer = window.dataLayer || [];
+    //       function gtag() {
+    //         window.dataLayer.push(arguments);
+    //       }
+    //       gtag("js", new Date());
+    //       gtag("config", "UA-125157178-1");
+    //       // Add analytics to window
+    //       window.gtag = gtag;
+    //     }
+    //   }
+    // );
   }
 
   // Function to change out layout, called by resize events and things
@@ -168,17 +166,12 @@ export default class App extends Component {
     Pubx.publish(PUBX_CONFIG.LAYOUT_KEY, {
       mobile: mobile,
       landscape: landscape && mobile,
-      portrait: portrait && mobile
+      portrait: portrait && mobile,
     });
   }
 
   getNewTouchpadKey() {
-    return (
-      "" +
-      Math.random()
-        .toString(36)
-        .substr(1, 9)
-    );
+    return "" + Math.random().toString(36).substr(1, 9);
   }
 
   updateOptionsClasses() {

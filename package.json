@@ -1,5 +1,5 @@
 {
-  "name": "vaporBoy",
+  "name": "vapor_boy",
   "displayName": "VaporBoy",
   "author": "Aaron Turner",
   "version": "0.2.0",
@@ -22,7 +22,8 @@
     "preact:dev": "preact watch --template src/template.html",
     "legacy:build": "npx cp -r 'legacy/' 'www/'",
     "privacy:build": "npx cp 'src/assets/privacypolicy.html' 'www/'",
-    "robots:build": "npx cp 'src/assets/robots.txt' 'www/'"
+    "robots:build": "npx cp 'src/assets/robots.txt' 'www/'",
+    "docs": "npx cp -r 'www/' 'docs/'"
   },
   "eslintConfig": {
     "extends": "eslint-config-synacor"

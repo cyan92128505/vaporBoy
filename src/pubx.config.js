@@ -1,11 +1,11 @@
 import { Pubx } from "./services/pubx";
 import {
   VAPORBOY_DEFAULT_OPTIONS,
-  VAPORBOY_OPTIONS_LOCALSTORAGE_KEY
+  VAPORBOY_OPTIONS_LOCALSTORAGE_KEY,
 } from "./vaporboyOptions.config";
 import {
   VAPORBOY_DEFAULT_EFFECTS,
-  VAPORBOY_EFFECTS_LOCALSTORAGE_KEY
+  VAPORBOY_EFFECTS_LOCALSTORAGE_KEY,
 } from "./vaporboyEffects.config";
 
 export const PUBX_CONFIG = {
@@ -30,7 +30,7 @@ export const PUBX_CONFIG = {
     initializePubxNotification();
     initializePubxLoading();
     initializePubxSpeed();
-  }
+  },
 };
 
 const initializePubxLayout = () => {
@@ -58,7 +58,7 @@ const initializePubxLayout = () => {
     isExpandedMobile: () => {
       const pubxLayoutState = Pubx.get(PUBX_CONFIG.LAYOUT_KEY);
       return pubxLayoutState.expanded && pubxLayoutState.mobile;
-    }
+    },
   };
   Pubx.publish(PUBX_CONFIG.LAYOUT_KEY, pubxLayoutState);
 };
@@ -74,20 +74,20 @@ const initializePubxControlPanel = () => {
 
       viewStack.push({
         title,
-        view: component
+        view: component,
       });
 
       Pubx.publish(PUBX_CONFIG.CONTROL_PANEL_KEY, {
-        viewStack
+        viewStack,
       });
     },
     hideControlPanel: () => {
       Pubx.publish(PUBX_CONFIG.CONTROL_PANEL_KEY, {
         show: false,
         required: false,
-        viewStack: []
+        viewStack: [],
       });
-    }
+    },
   };
   Pubx.publish(PUBX_CONFIG.CONTROL_PANEL_KEY, pubxControlPanelState);
 };
@@ -100,7 +100,7 @@ const initializePubxConfirmationModal = () => {
     text: "",
     confirmCallback: false,
     cancelCallback: false,
-    showConfirmationModal: passedParams => {
+    showConfirmationModal: (passedParams) => {
       // Set up our modal params, with defaults
       const confirmationModalParams = {
         title: "",
@@ -108,11 +108,11 @@ const initializePubxConfirmationModal = () => {
         confirmCallback: undefined,
         cancelCallback: undefined,
         confirmText: "OK",
-        cancelText: "Cancel"
+        cancelText: "Cancel",
       };
 
       if (passedParams) {
-        Object.keys(confirmationModalParams).forEach(paramKey => {
+        Object.keys(confirmationModalParams).forEach((paramKey) => {
           if (passedParams[paramKey]) {
             confirmationModalParams[paramKey] = passedParams[paramKey];
           }
@@ -126,7 +126,7 @@ const initializePubxConfirmationModal = () => {
         confirmCallback: confirmationModalParams.confirmCallback,
         cancelCallback: confirmationModalParams.cancelCallback,
         confirmText: confirmationModalParams.confirmText,
-        cancelText: confirmationModalParams.cancelText
+        cancelText: confirmationModalParams.cancelText,
       });
     },
     hideConfirmationModal: () => {
@@ -135,9 +135,9 @@ const initializePubxConfirmationModal = () => {
         title: "",
         text: "",
         confirmCallback: false,
-        cancelCallback: false
+        cancelCallback: false,
       });
-    }
+    },
   };
   Pubx.publish(PUBX_CONFIG.CONFIRMATION_MODAL_KEY, pubxConfirmationModalState);
 };
@@ -146,7 +146,7 @@ const initializePubxROMScraper = () => {
   const pubxROMScraperState = {
     activeTabIndex: 0,
     ROMInfo: undefined,
-    selectedROMIndex: -1
+    selectedROMIndex: -1,
   };
   Pubx.publish(PUBX_CONFIG.ROM_SCRAPER_KEY, pubxROMScraperState);
 };
@@ -163,7 +163,7 @@ const initializePubxVaporBoyOptions = () => {
     window.localStorage.setItem(
       VAPORBOY_OPTIONS_LOCALSTORAGE_KEY,
       JSON.stringify({
-        ...VAPORBOY_DEFAULT_OPTIONS
+        ...VAPORBOY_DEFAULT_OPTIONS,
       })
     );
     vaporBoyOptions = Object.assign({}, VAPORBOY_DEFAULT_OPTIONS);
@@ -184,7 +184,7 @@ const initializePubxVaporBoyEffects = () => {
     window.localStorage.setItem(
       VAPORBOY_EFFECTS_LOCALSTORAGE_KEY,
       JSON.stringify({
-        ...VAPORBOY_DEFAULT_EFFECTS
+        ...VAPORBOY_DEFAULT_EFFECTS,
       })
     );
     vaporBoyEffects = Object.assign({}, VAPORBOY_DEFAULT_EFFECTS);
@@ -202,9 +202,9 @@ const initializePubxNotification = () => {
       Pubx.publish(PUBX_CONFIG.NOTIFICATION_KEY, {
         text: text,
         isVisible: true,
-        isError: isError ? true : false
+        isError: isError ? true : false,
       });
-    }
+    },
   };
   Pubx.publish(PUBX_CONFIG.NOTIFICATION_KEY, pubxNotificationState);
 };
@@ -212,19 +212,19 @@ const initializePubxNotification = () => {
 const initializePubxLoading = () => {
   const pubxLoadingState = {
     promiseStack: [],
-    addPromiseToStack: promise => {
+    addPromiseToStack: (promise) => {
       Pubx.publish(PUBX_CONFIG.LOADING_KEY, {
         promiseStack: [
           ...Pubx.get(PUBX_CONFIG.LOADING_KEY).promiseStack,
-          promise
-        ]
+          promise,
+        ],
       });
     },
     clearPromiseStack: () => {
       Pubx.publish(PUBX_CONFIG.LOADING_KEY, {
-        promiseStack: []
+        promiseStack: [],
       });
-    }
+    },
   };
   Pubx.publish(PUBX_CONFIG.LOADING_KEY, pubxLoadingState);
 };
@@ -233,9 +233,9 @@ const initializePubxSpeed = () => {
   let speed = 1.0;
   const pubxSpeedState = {
     toggleSpeed: () => {
-      speed += 0.5;
-      if (speed > 2.0) {
-        speed = 0.5;
+      speed += 1;
+      if (speed > 20) {
+        speed = 1;
       }
     },
     getSpeed: () => {
@@ -243,7 +243,7 @@ const initializePubxSpeed = () => {
     },
     resetSpeed: () => {
       speed = 1.0;
-    }
+    },
   };
   Pubx.publish(PUBX_CONFIG.SPEED_KEY, pubxSpeedState);
 };
