@@ -15,7 +15,7 @@ import {
   bassBoostEffect,
   invertedEffect,
   monochromeEffect,
-  rainbowEffect
+  rainbowEffect,
 } from "../../vaporboyEffects.config";
 
 const packageJson = require("../../../package.json");
@@ -26,9 +26,9 @@ WasmBoy.ResponsiveGamepad.onInputsChange(
   [
     WasmBoy.ResponsiveGamepad.RESPONSIVE_GAMEPAD_INPUTS.LEFT_TRIGGER,
     WasmBoy.ResponsiveGamepad.RESPONSIVE_GAMEPAD_INPUTS.RIGHT_TRIGGER,
-    WasmBoy.ResponsiveGamepad.RESPONSIVE_GAMEPAD_INPUTS.SPECIAL
+    WasmBoy.ResponsiveGamepad.RESPONSIVE_GAMEPAD_INPUTS.SPECIAL,
   ],
-  state => {
+  (state) => {
     // Quick Speed
     if (!quickSpeed && (state.LEFT_TRIGGER || state.RIGHT_TRIGGER)) {
       WasmBoy.setSpeed(3.0);
@@ -36,7 +36,7 @@ WasmBoy.ResponsiveGamepad.onInputsChange(
       Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
         NOTIFICATION_MESSAGES.QUICK_SPEED_HOTKEY
       );
-    } else if (quickSpeed && (!state.LEFT_TRIGGER && !state.RIGHT_TRIGGER)) {
+    } else if (quickSpeed && !state.LEFT_TRIGGER && !state.RIGHT_TRIGGER) {
       WasmBoy.setSpeed(1.0);
       quickSpeed = false;
     }
@@ -87,25 +87,25 @@ export default class WasmBoyCanvas extends Component {
     // Also, subscribe to options/effects changes
     const pubxVaporBoyOptionsSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.VAPORBOY_OPTIONS_KEY,
-      newState => {
+      (newState) => {
         this.configWasmBoy(canvasElement);
         this.setState({
           ...this.state,
           options: {
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
     const pubxVaporBoyEffectsSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.VAPORBOY_EFFECTS_KEY,
-      newState => {
+      (newState) => {
         this.configWasmBoy(canvasElement);
         this.setState({
           ...this.state,
           effects: {
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
@@ -114,14 +114,14 @@ export default class WasmBoyCanvas extends Component {
     this.setState({
       ...this.state,
       options: {
-        ...Pubx.get(PUBX_CONFIG.VAPORBOY_OPTIONS_KEY)
+        ...Pubx.get(PUBX_CONFIG.VAPORBOY_OPTIONS_KEY),
       },
       effects: {
-        ...Pubx.get(PUBX_CONFIG.VAPORBOY_EFFECTS_KEY)
+        ...Pubx.get(PUBX_CONFIG.VAPORBOY_EFFECTS_KEY),
       },
       pubxVaporBoyOptionsSubscriberKey,
       pubxVaporBoyEffectsSubscriberKey,
-      vaporboyImage: getVaporBoyLogo()
+      vaporboyImage: getVaporBoyLogo(),
     });
 
     // Re-render every second for the debug menu
@@ -130,7 +130,7 @@ export default class WasmBoyCanvas extends Component {
         setTimeout(() => {
           if (this.state.options.showDebugMenu) {
             this.setState({
-              ...this.state
+              ...this.state,
             });
           }
           debugMenuUpdate();
@@ -173,7 +173,7 @@ export default class WasmBoyCanvas extends Component {
   configWasmBoy(canvasElement) {
     const wasmBoyConfigTask = async () => {
       const vaporboyOptions = {
-        ...Pubx.get(PUBX_CONFIG.VAPORBOY_OPTIONS_KEY)
+        ...Pubx.get(PUBX_CONFIG.VAPORBOY_OPTIONS_KEY),
       };
       // Done grab vaporboyEffects here,
       // As we need it to be grabbed in the callbacks
@@ -196,7 +196,7 @@ export default class WasmBoyCanvas extends Component {
         onReady: () => {
           Pubx.get(PUBX_CONFIG.SPEED_KEY).resetSpeed();
         },
-        saveStateCallback: saveStateObject => {
+        saveStateCallback: (saveStateObject) => {
           // Fire off analytics ping, for session length
           if (window !== undefined && window.gtag) {
             gtag("event", "save_state_callback");
@@ -216,7 +216,7 @@ export default class WasmBoyCanvas extends Component {
           let audioNode = audioBufferSourceNode;
 
           const vaporboyEffects = {
-            ...Pubx.get(PUBX_CONFIG.VAPORBOY_EFFECTS_KEY)
+            ...Pubx.get(PUBX_CONFIG.VAPORBOY_EFFECTS_KEY),
           };
 
           if (vaporboyEffects.vapor) {
@@ -229,9 +229,9 @@ export default class WasmBoyCanvas extends Component {
 
           return audioNode;
         },
-        updateGraphicsCallback: imageDataArray => {
+        updateGraphicsCallback: (imageDataArray) => {
           const vaporboyEffects = {
-            ...Pubx.get(PUBX_CONFIG.VAPORBOY_EFFECTS_KEY)
+            ...Pubx.get(PUBX_CONFIG.VAPORBOY_EFFECTS_KEY),
           };
 
           if (vaporboyEffects.vapor) {
@@ -249,7 +249,7 @@ export default class WasmBoyCanvas extends Component {
           if (vaporboyEffects.monochrome) {
             monochromeEffect(imageDataArray);
           }
-        }
+        },
       };
 
       await WasmBoy.config(wasmboyConfig, canvasElement);
@@ -275,9 +275,9 @@ export default class WasmBoyCanvas extends Component {
           <h3>Please insert a cartridge...</h3>
           <div class="wasmboy-canvas__insert-cartridge__instructions">
             {Pubx.get(PUBX_CONFIG.LAYOUT_KEY).mobile ? (
-              <div>⚙️ > 🎮 Select a ROM</div>
+              <div>⚙️ {">"} 🎮 Select a ROM</div>
             ) : (
-              <div>🖥️ Start > 🎮 Select a ROM</div>
+              <div>🖥️ Start {">"} 🎮 Select a ROM</div>
             )}
           </div>
         </div>
@@ -305,7 +305,8 @@ export default class WasmBoyCanvas extends Component {
         {debugOverlay}
         <div class="wasmboy-canvas__pause-overlay wasmboy-canvas__pause-overlay--hidden">
           Paused ⏸️
-        </div>;
+        </div>
+        ;
       </div>
     );
   }
