@@ -1,4 +1,3 @@
-git
 git checkout release
 git pull
 git merge master --no-commit --no-ff
