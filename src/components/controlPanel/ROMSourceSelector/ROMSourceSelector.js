@@ -29,28 +29,28 @@ export default class ROMSourceSelector extends Component {
     // Subscribe to our collection state
     const pubxRomCollectionSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.ROM_COLLECTION_KEY,
-      newState => {
+      (newState) => {
         this.setState({
           ...this.state,
           collection: {
             ...this.state.colleciton,
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
 
     this.setState({
       collection: {
-        ...Pubx.get(PUBX_CONFIG.ROM_COLLECTION_KEY)
+        ...Pubx.get(PUBX_CONFIG.ROM_COLLECTION_KEY),
       },
       controlPanel: {
-        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY)
+        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY),
       },
       confirmationModal: {
-        ...Pubx.get(PUBX_CONFIG.CONFIRMATION_MODAL_KEY)
+        ...Pubx.get(PUBX_CONFIG.CONFIRMATION_MODAL_KEY),
       },
-      pubxRomCollectionSubscriberKey
+      pubxRomCollectionSubscriberKey,
     });
   }
 
@@ -82,10 +82,10 @@ export default class ROMSourceSelector extends Component {
           viewStack: [
             {
               title: `ROM Scraper - ${ROMName}`,
-              view: <ROMScraper />
-            }
+              view: <ROMScraper />,
+            },
           ],
-          required: true
+          required: true,
         });
 
         if (window !== undefined && window.gtag) {
@@ -106,7 +106,7 @@ export default class ROMSourceSelector extends Component {
           }
         };
         const playROMPromise = playROMTask();
-        playROMPromise.catch(error => {
+        playROMPromise.catch((error) => {
           console.error(error);
           Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
             NOTIFICATION_MESSAGES.ERROR_LOAD_ROM
@@ -114,7 +114,7 @@ export default class ROMSourceSelector extends Component {
         });
         Pubx.get(PUBX_CONFIG.LOADING_KEY).addPromiseToStack(playROMPromise);
       },
-      cancelText: "Skip"
+      cancelText: "Skip",
     });
   }
 
@@ -143,7 +143,7 @@ export default class ROMSourceSelector extends Component {
 
       const googlePickerFileObject = data.docs[0];
       const oAuthHeaders = new Headers({
-        Authorization: "Bearer " + googlePickerOAuthToken
+        Authorization: "Bearer " + googlePickerOAuthToken,
       });
 
       // First Fetch the Information about the file
@@ -151,13 +151,13 @@ export default class ROMSourceSelector extends Component {
         "https://www.googleapis.com/drive/v2/files/" +
           googlePickerFileObject.id,
         {
-          headers: oAuthHeaders
+          headers: oAuthHeaders,
         }
       )
-        .then(response => {
+        .then((response) => {
           return response.json();
         })
-        .then(responseJson => {
+        .then((responseJson) => {
           if (
             responseJson.title.endsWith(".zip") ||
             responseJson.title.endsWith(".gb") ||
@@ -168,13 +168,13 @@ export default class ROMSourceSelector extends Component {
                 // Finally load the file using the oAuthHeaders
                 WasmBoy.loadROM(responseJson.downloadUrl, {
                   headers: oAuthHeaders,
-                  fileName: responseJson.title
+                  fileName: responseJson.title,
                 })
                   .then(() => {
                     this.askToAddROMToCollection(responseJson.title);
                     resolve();
                   })
-                  .catch(error => {
+                  .catch((error) => {
                     console.error("Load Game Error:", error);
                     Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
                       NOTIFICATION_MESSAGES.ERROR_LOAD_ROM
@@ -182,7 +182,7 @@ export default class ROMSourceSelector extends Component {
                     reject();
                   });
               })
-              .catch(error => {
+              .catch((error) => {
                 console.error(error);
                 Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
                   NOTIFICATION_MESSAGES.ERROR_LOAD_ROM
@@ -197,7 +197,7 @@ export default class ROMSourceSelector extends Component {
             reject();
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
           Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
             NOTIFICATION_MESSAGES.ERROR_GOOGLE_DRIVE
@@ -236,7 +236,7 @@ export default class ROMSourceSelector extends Component {
           Uploaded ROMs can be stored in "My Collection" for offline playing
           using IndexedDb.
         </div>
-      )
+      ),
     });
   }
 
@@ -309,10 +309,10 @@ export default class ROMSourceSelector extends Component {
           <GooglePicker
             clientId={VAPORBOY_GOOGLE_PICKER_CLIENT_ID}
             scope={["https://www.googleapis.com/auth/drive.readonly"]}
-            onChange={data => {
+            onChange={(data) => {
               this.loadGoogleDriveFile(data);
             }}
-            onAuthenticate={token => {
+            onAuthenticate={(token) => {
               googlePickerOAuthToken = token;
             }}
             multiselect={false}
@@ -340,9 +340,9 @@ export default class ROMSourceSelector extends Component {
           type="file"
           id="ROMFileInput"
           class="hidden"
-          accept=".gb, .gbc, .zip"
+          accept="*"
           value={undefined}
-          onChange={event => {
+          onChange={(event) => {
             this.loadLocalFile(event);
           }}
         />
