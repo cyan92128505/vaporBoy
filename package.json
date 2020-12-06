@@ -23,7 +23,7 @@
     "legacy:build": "npx cp -r 'legacy/' 'www/'",
     "privacy:build": "npx cp 'src/assets/privacypolicy.html' 'www/'",
     "robots:build": "npx cp 'src/assets/robots.txt' 'www/'",
-    "docs": "npm run build && npx cp -r 'www/' '/'",
+    "docs": "npm run build && npx cp -r 'www/' ''",
     "deploy": "sh ./CI/release.sh"
   },
   "eslintConfig": {
