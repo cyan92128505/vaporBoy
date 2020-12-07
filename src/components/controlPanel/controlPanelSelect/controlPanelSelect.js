@@ -8,6 +8,7 @@ import { NOTIFICATION_MESSAGES } from "../../../notification.messages";
 
 import ROMSourceSelector from "../ROMSourceSelector/ROMSourceSelector";
 import LoadStateList from "../loadStateList/loadStateList";
+import OutputStateList from "../outputStateList/outputStateList";
 import VaporBoyOptions from "../vaporBoyOptions/vaporBoyOptions";
 import VaporBoyEffects from "../vaporBoyEffects/vaporBoyEffects";
 import About from "../about/about";
@@ -23,31 +24,31 @@ export default class ControlPanelSelect extends Component {
     // Subscribe to our save states for enabling/disabling loading
     const pubxSaveStatesSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.SAVES_STATES_KEY,
-      newState => {
+      (newState) => {
         this.setState({
           ...this.state,
           saveStates: {
             ...this.state.saveStates,
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
 
     this.setState({
       collection: {
-        ...Pubx.get(PUBX_CONFIG.ROM_COLLECTION_KEY)
+        ...Pubx.get(PUBX_CONFIG.ROM_COLLECTION_KEY),
       },
       saveStates: {
-        ...Pubx.get(PUBX_CONFIG.SAVES_STATES_KEY)
+        ...Pubx.get(PUBX_CONFIG.SAVES_STATES_KEY),
       },
       controlPanel: {
-        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY)
+        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY),
       },
       speed: {
-        ...Pubx.get(PUBX_CONFIG.SPEED_KEY)
+        ...Pubx.get(PUBX_CONFIG.SPEED_KEY),
       },
-      pubxSaveStatesSubscriberKey
+      pubxSaveStatesSubscriberKey,
     });
   }
 
@@ -81,16 +82,14 @@ export default class ControlPanelSelect extends Component {
               NOTIFICATION_MESSAGES.SAVE_STATE
             );
           })
-          .catch(error => {
+          .catch((error) => {
             console.error(error);
             Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
-              `${NOTIFICATION_MESSAGES.SAVE_STATE} ${
-                NOTIFICATION_MESSAGES.ERROR_RESUME_ROM
-              }`
+              `${NOTIFICATION_MESSAGES.SAVE_STATE} ${NOTIFICATION_MESSAGES.ERROR_RESUME_ROM}`
             );
           });
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error);
         Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
           NOTIFICATION_MESSAGES.ERROR_SAVE_STATE
@@ -113,6 +112,13 @@ export default class ControlPanelSelect extends Component {
     this.state.controlPanel.addComponentToControlPanelViewStack(
       "Select a ROM",
       <ROMSourceSelector />
+    );
+  }
+
+  viewOutputStateList() {
+    this.state.controlPanel.addComponentToControlPanelViewStack(
+      "Output State",
+      <OutputStateList />
     );
   }
 
@@ -157,7 +163,6 @@ export default class ControlPanelSelect extends Component {
       <Legacy />
     );
   }
-
 
   playROM() {
     WasmBoy.play();
@@ -263,6 +268,16 @@ export default class ControlPanelSelect extends Component {
             >
               <div>📂</div>
               <div>Load State</div>
+            </button>
+          </li>
+          <li class="control-panel-select__grid__item">
+            <button
+              onclick={() => this.viewOutputStateList()}
+              disabled={this.shouldDisableLoadStates()}
+              aria-label="Output State for current loaded ROM"
+            >
+              <div>📂</div>
+              <div>Output State</div>
             </button>
           </li>
           <li class="control-panel-select__grid__item">
