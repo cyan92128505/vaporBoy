@@ -18,11 +18,11 @@ export default class MyCollection extends Component {
   componentDidMount() {
     this.setState({
       collection: {
-        ...Pubx.get(PUBX_CONFIG.ROM_COLLECTION_KEY)
+        ...Pubx.get(PUBX_CONFIG.ROM_COLLECTION_KEY),
       },
       controlPanel: {
-        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY)
-      }
+        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY),
+      },
     });
   }
 
@@ -51,7 +51,7 @@ export default class MyCollection extends Component {
     };
 
     const loadROMPromise = loadROMTask();
-    loadROMPromise.catch(error => {
+    loadROMPromise.catch((error) => {
       console.error(error);
       Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
         NOTIFICATION_MESSAGES.ERROR_LOAD_ROM
@@ -71,10 +71,10 @@ export default class MyCollection extends Component {
         viewStack: [
           {
             title: `ROM Scraper - ${collectionROM.titleAsString}`,
-            view: <ROMScraper rom={collectionROM.ROM} />
-          }
+            view: <ROMScraper rom={collectionROM.ROM} />,
+          },
         ],
-        required: true
+        required: true,
       });
     };
     Pubx.get(PUBX_CONFIG.LOADING_KEY).addPromiseToStack(editROMTask());
@@ -84,7 +84,7 @@ export default class MyCollection extends Component {
     let collectionROMs = [];
     if (this.state.collection && this.state.collection.collection) {
       Object.keys(this.state.collection.collection).forEach(
-        collectionROMKey => {
+        (collectionROMKey) => {
           const collectionROM = this.state.collection.collection[
             collectionROMKey
           ];
