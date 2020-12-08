@@ -49,6 +49,10 @@
         border: none;
         background-color: transparent;
         font-size: 1.5rem;
+        
+        label.disabled {
+          opacity: 0.25;
+        }
       }
     }
   }

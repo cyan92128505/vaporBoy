@@ -100,7 +100,37 @@ export default class ControlPanelSelect extends Component {
   uploadState(e) {
     let file = e.target.files[0];
     try {
-      WasmBoy.loadState(JSON.parse(file));
+      alert(!!file ? file.length : "ERROR File");
+      let saveState = JSON.parse(file);
+      const loadStatePromise = new Promise((resolve, reject) => {
+        WasmBoy.loadState(saveState)
+          .then(() => {
+            WasmBoy.play()
+              .then(() => {
+                this.state.controlPanel.hideControlPanel();
+                Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
+                  NOTIFICATION_MESSAGES.LOAD_STATE
+                );
+                resolve();
+              })
+              .catch((error) => {
+                console.error(error);
+                Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
+                  NOTIFICATION_MESSAGES.ERROR_RESUME_ROM
+                );
+                reject();
+              });
+          })
+          .catch((error) => {
+            console.error(error);
+            Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
+              NOTIFICATION_MESSAGES.ERROR_LOAD_STATE
+            );
+            reject();
+          });
+      });
+
+      Pubx.get(PUBX_CONFIG.LOADING_KEY).addPromiseToStack(loadStatePromise);
     } catch (error) {
       console.log(error);
     }
@@ -291,7 +321,10 @@ export default class ControlPanelSelect extends Component {
           </li>
           <li class="control-panel-select__grid__item">
             <div class="file-input">
-              <label for="file-input">
+              <label
+                for="file-input"
+                className={WasmBoy.isReady() ? "" : "disabled"}
+              >
                 <div>💾</div>
                 <div>Upload State</div>
               </label>
