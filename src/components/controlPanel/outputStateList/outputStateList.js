@@ -1,11 +1,11 @@
 import { Component } from "preact";
 import { WasmBoy } from "wasmboy";
+import FileSaver from "file-saver";
 
 import { Pubx } from "../../../services/pubx";
 import { PUBX_CONFIG } from "../../../pubx.config";
 
 import { NOTIFICATION_MESSAGES } from "../../../notification.messages";
-import download from "../../../services/download";
 
 const packageJson = require("../../../../package.json");
 
@@ -27,10 +27,13 @@ export default class OutputStateList extends Component {
   }
 
   checkStateVersion(saveState) {
-    download(
+    FileSaver.saveAs(
       JSON.stringify(saveState),
-      saveState.date + ".json",
-      "application/octet-stream"
+      packageJson.displayName +
+        packageJson.version +
+        "-" +
+        saveState.date +
+        ".json"
     );
   }
 
