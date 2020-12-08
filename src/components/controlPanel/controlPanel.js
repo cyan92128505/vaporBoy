@@ -16,7 +16,7 @@ export default class ControlPanel extends Component {
     // Subscribe to changes
     const pubxControlPanelSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.CONTROL_PANEL_KEY,
-      newState => {
+      (newState) => {
         // Check if we are being shown/hidden
         if (
           !this.state.controlPanel ||
@@ -32,17 +32,17 @@ export default class ControlPanel extends Component {
           ...this.state,
           controlPanel: {
             ...this.state.controlPanel,
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
 
     this.setState({
       controlPanel: {
-        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY)
+        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY),
       },
-      pubxControlPanelSubscriberKey
+      pubxControlPanelSubscriberKey,
     });
 
     if (window !== undefined && window.gtag) {
@@ -79,7 +79,7 @@ export default class ControlPanel extends Component {
     viewStack.pop();
 
     Pubx.publish(PUBX_CONFIG.CONTROL_PANEL_KEY, {
-      viewStack
+      viewStack,
     });
   }
 
@@ -104,7 +104,7 @@ export default class ControlPanel extends Component {
         this.state.controlPanel.viewStack.length - 1
       ].title;
     } else {
-      this.state.controlPanel.viewStack.forEach(view => {
+      this.state.controlPanel.viewStack.forEach((view) => {
         currentTitle += ` - ${view.title}`;
       });
     }

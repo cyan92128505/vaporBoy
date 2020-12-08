@@ -18,7 +18,7 @@ export default class GooglePicker extends Component {
     authImmediate: false,
     multiselect: false,
     navHidden: false,
-    disabled: false
+    disabled: false,
   };
 
   constructor(props) {
@@ -64,7 +64,7 @@ export default class GooglePicker extends Component {
       {
         client_id: this.props.clientId,
         scope: this.props.scope,
-        immediate: this.props.authImmediate
+        immediate: this.props.authImmediate,
       },
       callback
     );

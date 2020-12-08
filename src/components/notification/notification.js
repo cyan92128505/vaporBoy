@@ -9,14 +9,14 @@ export default class Notification extends Component {
     this.setState({
       ...this.state,
       notification: {},
-      timeout: undefined
+      timeout: undefined,
     });
   }
 
   componentDidMount() {
     const pubxNotificationSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.NOTIFICATION_KEY,
-      newState => {
+      (newState) => {
         if (!this.state.notification.isVisible && newState.isVisible) {
           // We need to show the notification
           this.showNotification();
@@ -27,8 +27,8 @@ export default class Notification extends Component {
           ...this.state,
           notification: {
             ...this.state.notification,
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
@@ -64,13 +64,13 @@ export default class Notification extends Component {
     // Set up a timeout to automitically hide the notification
     const timeout = setTimeout(() => {
       Pubx.publish(PUBX_CONFIG.NOTIFICATION_KEY, {
-        isVisible: false
+        isVisible: false,
       });
     }, 7500);
 
     this.setState({
       ...this.state,
-      timeout: timeout
+      timeout: timeout,
     });
   }
 
@@ -78,12 +78,12 @@ export default class Notification extends Component {
     clearTimeout(this.state.timeout);
 
     Pubx.publish(PUBX_CONFIG.NOTIFICATION_KEY, {
-      isVisible: false
+      isVisible: false,
     });
 
     this.setState({
       ...this.state,
-      timeout: false
+      timeout: false,
     });
   }
 

@@ -12,22 +12,22 @@ export default class ConfirmationModal extends Component {
   componentDidMount() {
     const pubxConfirmationModalSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.CONFIRMATION_MODAL_KEY,
-      newState => {
+      (newState) => {
         this.setState({
           ...this.state,
           confirmationModal: {
             ...this.state.confirmationModal,
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
 
     this.setState({
       confirmationModal: {
-        ...Pubx.get(PUBX_CONFIG.CONFIRMATION_MODAL_KEY)
+        ...Pubx.get(PUBX_CONFIG.CONFIRMATION_MODAL_KEY),
       },
-      pubxConfirmationModalSubscriberKey
+      pubxConfirmationModalSubscriberKey,
     });
   }
 
@@ -73,7 +73,7 @@ export default class ConfirmationModal extends Component {
         <button onClick={() => this.confirmButtonClick()}>
           {this.state.confirmationModal.confirmText}
         </button>
-      </div>
+      </div>,
     ];
     if (this.state.confirmationModal.confirmCallback) {
       buttons.push(

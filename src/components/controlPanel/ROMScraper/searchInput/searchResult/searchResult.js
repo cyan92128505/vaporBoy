@@ -7,7 +7,7 @@ export default class SearchResult extends Component {
   constructor() {
     super();
     this.setState({
-      loading: false
+      loading: false,
     });
   }
 
@@ -15,23 +15,23 @@ export default class SearchResult extends Component {
     // IIFE
     (async () => {
       // We need to convert our image to base 64
-      const imageToDataUrlTask = async imageUrl => {
+      const imageToDataUrlTask = async (imageUrl) => {
         fetch(imageUrl)
-          .then(response => response.blob())
-          .then(blob => {
+          .then((response) => response.blob())
+          .then((blob) => {
             const fileReader = new FileReader();
-            fileReader.onload = onloadEvent => {
+            fileReader.onload = (onloadEvent) => {
               Pubx.publish(PUBX_CONFIG.ROM_SCRAPER_KEY, {
                 ROMInfo: {
                   title: this.props.title,
-                  imageDataURL: onloadEvent.target.result
+                  imageDataURL: onloadEvent.target.result,
                 },
-                selectedROMIndex: this.props.index
+                selectedROMIndex: this.props.index,
               });
 
               this.setState({
                 ...this.state,
-                loading: false
+                loading: false,
               });
             };
             fileReader.readAsDataURL(blob);
@@ -40,7 +40,7 @@ export default class SearchResult extends Component {
 
       this.setState({
         ...this.state,
-        loading: true
+        loading: true,
       });
       imageToDataUrlTask(this.props.image);
     })();
@@ -63,7 +63,7 @@ export default class SearchResult extends Component {
     return (
       <button
         class={rootElementClass}
-        onClick={e => this.resultSelected()}
+        onClick={(e) => this.resultSelected()}
         aria-label={`${ariaText} ${this.props.title}`}
       >
         <div class="search-result__image">

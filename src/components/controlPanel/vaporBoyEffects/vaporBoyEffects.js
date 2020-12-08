@@ -5,7 +5,7 @@ import { PUBX_CONFIG } from "../../../pubx.config";
 
 import {
   VAPORBOY_EFFECTS_LOCALSTORAGE_KEY,
-  VAPORBOY_DEFAULT_EFFECTS
+  VAPORBOY_DEFAULT_EFFECTS,
 } from "../../../vaporboyEffects.config";
 import { VAPORBOY_EFFECTS_SECTIONS } from "./vaporBoyEffects.sections";
 
@@ -15,7 +15,7 @@ export default class VaporBoyEffects extends Component {
   constructor() {
     super();
     this.setState({
-      effects: {}
+      effects: {},
     });
   }
 
@@ -23,12 +23,12 @@ export default class VaporBoyEffects extends Component {
     // Subscribe to options changes
     const pubxVaporBoyEffectsSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.VAPORBOY_EFFECTS_KEY,
-      newState => {
+      (newState) => {
         this.setState({
           ...this.state,
           effects: {
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
@@ -36,9 +36,9 @@ export default class VaporBoyEffects extends Component {
     this.setState({
       ...this.state,
       effects: {
-        ...Pubx.get(PUBX_CONFIG.VAPORBOY_EFFECTS_KEY)
+        ...Pubx.get(PUBX_CONFIG.VAPORBOY_EFFECTS_KEY),
       },
-      pubxVaporBoyEffectsSubscriberKey
+      pubxVaporBoyEffectsSubscriberKey,
     });
   }
 

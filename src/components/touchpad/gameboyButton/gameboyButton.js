@@ -15,9 +15,9 @@ const GRADIENTS = {
     GBC_STOP_COLORS: ["#494f54", "#212931"],
     EXPANDED_STOP_COLORS: [
       "rgba(255, 255, 255, 0.5)",
-      "rgba(255, 255, 255, 0.5)"
+      "rgba(255, 255, 255, 0.5)",
     ],
-    EXPANDED_SAFARI_STOP_OPACITY: ["0.5", "0.5"]
+    EXPANDED_SAFARI_STOP_OPACITY: ["0.5", "0.5"],
   },
   BUTTON_LETTER_FILL: {
     ID: "ButtonLetterFill",
@@ -25,9 +25,9 @@ const GRADIENTS = {
     GBC_STOP_COLORS: ["#1d252c", "#212931"],
     EXPANDED_STOP_COLORS: [
       "rgba(150, 150, 150, 0.25)",
-      "rgba(150, 150, 150, 0.25)"
+      "rgba(150, 150, 150, 0.25)",
     ],
-    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25"]
+    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25"],
   },
   BUTTON_LETTER_STROKE: {
     ID: "ButtonLetterStroke",
@@ -36,10 +36,10 @@ const GRADIENTS = {
     EXPANDED_STOP_COLORS: [
       "rgba(200, 200, 200, 0.25)",
       "rgba(200, 200, 200, 0.25)",
-      "rgba(200, 200, 200, 0.25)"
+      "rgba(200, 200, 200, 0.25)",
     ],
-    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25", "0.25"]
-  }
+    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25", "0.25"],
+  },
 };
 
 const getStopColor = (gradientObject, stopColorIndex, isGbc, isExpanded) => {
@@ -74,7 +74,7 @@ export default class GameboyButton extends Component {
     this.setState({
       ...this.state,
       elementId: getInputId(),
-      keyMapButton: undefined
+      keyMapButton: undefined,
     });
   }
 
@@ -93,9 +93,9 @@ export default class GameboyButton extends Component {
       ...this.state,
       keyMapButton: keyMapButton,
       layout: {
-        ...pubxLayoutState
+        ...pubxLayoutState,
       },
-      removeTouchInput
+      removeTouchInput,
     });
   }
 
@@ -203,7 +203,7 @@ export default class GameboyButton extends Component {
     const buttonSize = {
       yPosition: "0",
       yRadius: "50%",
-      height: 100
+      height: 100,
     };
     if (this.props.button === "start" || this.props.button === "select") {
       if (isGbc) {

@@ -8,21 +8,21 @@ export default class ExpandButton extends Component {
   constructor() {
     super();
     this.setState({
-      layout: {}
+      layout: {},
     });
   }
 
   componentDidMount() {
     const pubxLayoutSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.LAYOUT_KEY,
-      newState => {
+      (newState) => {
         // Finally set the state
         this.setState({
           ...this.state,
           layout: {
             ...this.state.layout,
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );

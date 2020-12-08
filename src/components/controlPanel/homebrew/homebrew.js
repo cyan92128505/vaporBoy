@@ -19,8 +19,8 @@ export default class Homebrew extends Component {
   componentDidMount() {
     this.setState({
       controlPanel: {
-        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY)
-      }
+        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY),
+      },
     });
   }
 
@@ -41,7 +41,7 @@ export default class Homebrew extends Component {
     };
 
     const loadHomebrewPromise = loadHomebrewTask();
-    loadHomebrewPromise.catch(error => {
+    loadHomebrewPromise.catch((error) => {
       console.error(error);
       Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
         NOTIFICATION_MESSAGES.ERROR_LOAD_ROM
@@ -53,13 +53,13 @@ export default class Homebrew extends Component {
   showHomebrewInfo(game) {
     Pubx.get(PUBX_CONFIG.CONFIRMATION_MODAL_KEY).showConfirmationModal({
       title: `Homebrew Info - ${game.title}`,
-      contentElement: game.infoElement
+      contentElement: game.infoElement,
     });
   }
 
   render() {
     let homebrewROMs = [];
-    AVAILABLE_GAMES.forEach(game => {
+    AVAILABLE_GAMES.forEach((game) => {
       homebrewROMs.push(
         <li class="ROM-list__item" aria-label={game.title}>
           <div class="ROM-list__item__cartridge">

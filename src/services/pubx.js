@@ -34,7 +34,7 @@ class PubxService {
   _initializeStateKey(stateKey) {
     this.state[stateKey] = {
       value: undefined,
-      subscribers: {}
+      subscribers: {},
     };
   }
 
@@ -57,7 +57,7 @@ class PubxService {
       this._initializeStateKey(stateKey);
     }
 
-    this.state[stateKey].subscribers[subscriberId] = stateValue => {
+    this.state[stateKey].subscribers[subscriberId] = (stateValue) => {
       callback(stateValue);
     };
 
@@ -84,13 +84,13 @@ class PubxService {
     // Set the value
     this.state[stateKey].value = {
       ...this.state[stateKey].value,
-      ...stateValue
+      ...stateValue,
     };
 
     // Call our subscribers, passing back the entire new state
-    Object.keys(this.state[stateKey].subscribers).forEach(subscriberKey => {
+    Object.keys(this.state[stateKey].subscribers).forEach((subscriberKey) => {
       this.state[stateKey].subscribers[subscriberKey]({
-        ...this.state[stateKey].value
+        ...this.state[stateKey].value,
       });
     });
   }

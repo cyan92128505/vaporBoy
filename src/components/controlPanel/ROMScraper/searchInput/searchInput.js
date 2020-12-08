@@ -13,20 +13,20 @@ export default class SearchInput extends Component {
       currentSearch: undefined,
       executedSearch: undefined,
       ROMScraper: {
-        ...Pubx.get(PUBX_CONFIG.ROM_SCRAPER_KEY)
-      }
+        ...Pubx.get(PUBX_CONFIG.ROM_SCRAPER_KEY),
+      },
     });
   }
 
   componentDidMount() {
     const pubxROMScraperSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.ROM_SCRAPER_KEY,
-      newState => {
+      (newState) => {
         this.setState({
           ...this.state,
           ROMScraper: {
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
@@ -37,7 +37,7 @@ export default class SearchInput extends Component {
       results: [],
       currentSearch: undefined,
       executedSearch: undefined,
-      pubxROMScraperSubscriberKey: pubxROMScraperSubscriberKey
+      pubxROMScraperSubscriberKey: pubxROMScraperSubscriberKey,
     });
   }
 
@@ -60,26 +60,24 @@ export default class SearchInput extends Component {
     }
 
     Pubx.publish(PUBX_CONFIG.ROM_SCRAPER_KEY, {
-      selectedROMIndex: -1
+      selectedROMIndex: -1,
     });
 
     // Set that we are loading
     this.setState({
       ...this.state,
       loading: true,
-      executedSearch: this.state.currentSearch
+      executedSearch: this.state.currentSearch,
     });
 
     // Fetch from the vaporboy api
     fetch(
-      `https://vaporboy.net/scrape/giantbomb?format=json&filter=name:${
-        this.state.currentSearch
-      },platforms:57|3&field_list=name,image,original_release_date,platforms`
+      `https://vaporboy.net/scrape/giantbomb?format=json&filter=name:${this.state.currentSearch},platforms:57|3&field_list=name,image,original_release_date,platforms`
     )
-      .then(response => {
+      .then((response) => {
         return response.json();
       })
-      .then(response => {
+      .then((response) => {
         const results = [];
         response.results.forEach((result, index) => {
           results.push(
@@ -96,7 +94,7 @@ export default class SearchInput extends Component {
         this.setState({
           ...this.state,
           loading: false,
-          results: [...results]
+          results: [...results],
         });
       });
 
@@ -145,17 +143,17 @@ export default class SearchInput extends Component {
             placeholder="Search for a GB or GBC game..."
             aria-label="Input text to search for a GB or GBC game..."
             value={this.state.currentSearch}
-            onChange={event =>
+            onChange={(event) =>
               this.setState({
                 ...this.state,
-                currentSearch: event.target.value
+                currentSearch: event.target.value,
               })
             }
-            onKeyPress={event => {
+            onKeyPress={(event) => {
               // Need to set state first, or else will eat enters.
               this.setState({
                 ...this.state,
-                currentSearch: event.target.value
+                currentSearch: event.target.value,
               });
               if (event.key == "Enter") {
                 this.performSearch();
@@ -164,7 +162,7 @@ export default class SearchInput extends Component {
           />
           <div class="aesthetic-windows-95-button">
             <button
-              onClick={event => this.performSearch()}
+              onClick={(event) => this.performSearch()}
               aria-label="Execute ROM Info Search"
             >
               Search

@@ -1,5 +1,5 @@
 // https://github.com/prateekbh/preact-cli-sw-precache
-const preactCliSwPrecachePlugin = require('preact-cli-sw-precache');
+const preactCliSwPrecachePlugin = require("preact-cli-sw-precache");
 
 /**
  * Function that mutates original webpack config.
@@ -9,7 +9,7 @@ const preactCliSwPrecachePlugin = require('preact-cli-sw-precache');
  * @param {object} env - options passed to CLI.
  * @param {WebpackConfigHelpers} helpers - object with useful helpers when working with config.
  **/
-export default function(config, env, helpers) {
+export default function (config, env, helpers) {
   if (env.production) {
     // https://stackoverflow.com/questions/45870467/error-in-bundle-js-from-uglifyjs-name-expected
     const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
@@ -37,10 +37,10 @@ export default function(config, env, helpers) {
   // TODO: Make this absolute for production: https://github.com/developit/preact-cli/issues/279
   config.output.publicPath = "";
 
-  // Need to not navigate to index.html, 
+  // Need to not navigate to index.html,
   // for anything beyond the legacy path
   const precacheConfig = {
-    navigateFallbackWhitelist: [ /^(?!(\/legacy))(?!\/__).*/ ]
+    navigateFallbackWhitelist: [/^(?!(\/legacy))(?!\/__).*/],
   };
   return preactCliSwPrecachePlugin(config, precacheConfig);
 }

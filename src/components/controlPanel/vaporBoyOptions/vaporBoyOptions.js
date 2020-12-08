@@ -5,7 +5,7 @@ import { PUBX_CONFIG } from "../../../pubx.config";
 
 import {
   VAPORBOY_OPTIONS_LOCALSTORAGE_KEY,
-  VAPORBOY_DEFAULT_OPTIONS
+  VAPORBOY_DEFAULT_OPTIONS,
 } from "../../../vaporboyOptions.config";
 import { VAPORBOY_OPTION_SECTIONS } from "./vaporBoyOptions.sections";
 
@@ -15,7 +15,7 @@ export default class VaporBoyOptions extends Component {
   constructor() {
     super();
     this.setState({
-      options: {}
+      options: {},
     });
   }
 
@@ -23,12 +23,12 @@ export default class VaporBoyOptions extends Component {
     // Subscribe to options changes
     const pubxVaporBoyOptionsSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.VAPORBOY_OPTIONS_KEY,
-      newState => {
+      (newState) => {
         this.setState({
           ...this.state,
           options: {
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
@@ -36,9 +36,9 @@ export default class VaporBoyOptions extends Component {
     this.setState({
       ...this.state,
       options: {
-        ...Pubx.get(PUBX_CONFIG.VAPORBOY_OPTIONS_KEY)
+        ...Pubx.get(PUBX_CONFIG.VAPORBOY_OPTIONS_KEY),
       },
-      pubxVaporBoyOptionsSubscriberKey
+      pubxVaporBoyOptionsSubscriberKey,
     });
   }
 

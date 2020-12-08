@@ -21,5 +21,5 @@ export const NOTIFICATION_MESSAGES = {
   ERROR_GOOGLE_DRIVE: "Error getting file from google drive 💔",
   TOGGLE_SPEED: "Speed Toggled! ⚡",
   QUICK_SPEED_HOTKEY: "Quick Speed HotKey! ⚡",
-  PLAY_PAUSE_HOTKEY: "Play/Pause Hotkey! ⏯️"
+  PLAY_PAUSE_HOTKEY: "Play/Pause Hotkey! ⏯️",
 };

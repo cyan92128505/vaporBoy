@@ -16,7 +16,7 @@ export const VAPORBOY_OPTION_SECTIONS = {
             "GBC" mode.
           </div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       isGbcColorizationEnabled: {
         name: "Use GBC Colorization of GB games",
@@ -28,14 +28,14 @@ export const VAPORBOY_OPTION_SECTIONS = {
             palette.
           </div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       isAudioEnabled: {
         name: "Enable Audio",
         descriptionElement: <div>Enable/Disable Audio Output</div>,
-        type: "boolean"
-      }
-    }
+        type: "boolean",
+      },
+    },
   },
   interface: {
     name: "Interface",
@@ -51,9 +51,9 @@ export const VAPORBOY_OPTION_SECTIONS = {
             useful when, using a gamepad on mobile.
           </div>
         ),
-        type: "boolean"
-      }
-    }
+        type: "boolean",
+      },
+    },
   },
   performance: {
     name: "Performance",
@@ -69,7 +69,8 @@ export const VAPORBOY_OPTION_SECTIONS = {
           target="_blank"
         >
           WasmBoy performance tests
-        </a>.
+        </a>
+        .
       </div>
     ),
     settings: {
@@ -87,7 +88,7 @@ export const VAPORBOY_OPTION_SECTIONS = {
         ),
         type: "integer",
         min: 0,
-        max: 400
+        max: 400,
       },
       frameSkip: {
         name: "Frame Skip",
@@ -100,7 +101,7 @@ export const VAPORBOY_OPTION_SECTIONS = {
         ),
         type: "integer",
         min: 0,
-        max: 60
+        max: 60,
       },
       audioBatchProcessing: {
         name: "Audio Batch Processing",
@@ -110,7 +111,7 @@ export const VAPORBOY_OPTION_SECTIONS = {
             for an event, out for requested output.
           </div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       timersBatchProcessing: {
         name: "Timers Batch Processing",
@@ -121,7 +122,7 @@ export const VAPORBOY_OPTION_SECTIONS = {
             requirment.
           </div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       audioAccumulateSamples: {
         name: "Accumulate Audio Samples",
@@ -133,7 +134,7 @@ export const VAPORBOY_OPTION_SECTIONS = {
             output the same samples for as long as they have been the same.
           </div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       graphicsBatchProcessing: {
         name: "Graphics Batch Processing",
@@ -145,7 +146,7 @@ export const VAPORBOY_OPTION_SECTIONS = {
             games.
           </div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       graphicsDisableScanlineRendering: {
         name: "Disable Scanline Rendering",
@@ -156,7 +157,7 @@ export const VAPORBOY_OPTION_SECTIONS = {
             final scanline. But this will break most scrolling in games.
           </div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       tileRendering: {
         name: "Tile Rendering",
@@ -169,7 +170,7 @@ export const VAPORBOY_OPTION_SECTIONS = {
             happen.
           </div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       tileCaching: {
         name: "Tile Caching",
@@ -183,9 +184,9 @@ export const VAPORBOY_OPTION_SECTIONS = {
             tile.
           </div>
         ),
-        type: "boolean"
-      }
-    }
+        type: "boolean",
+      },
+    },
   },
   debug: {
     name: "Debug",
@@ -201,8 +202,8 @@ export const VAPORBOY_OPTION_SECTIONS = {
             like a FPS Counter.
           </div>
         ),
-        type: "boolean"
-      }
-    }
-  }
+        type: "boolean",
+      },
+    },
+  },
 };
