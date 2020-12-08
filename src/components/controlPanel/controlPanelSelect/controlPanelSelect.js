@@ -97,6 +97,15 @@ export default class ControlPanelSelect extends Component {
       });
   }
 
+  uploadState(e) {
+    let file = e.target.files[0];
+    try {
+      WasmBoy.loadState(JSON.parse(file));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   toggleSpeed() {
     this.state.speed.toggleSpeed();
     let speed = this.state.speed.getSpeed();
@@ -279,6 +288,23 @@ export default class ControlPanelSelect extends Component {
               <div>📂</div>
               <div>Output State</div>
             </button>
+          </li>
+          <li class="control-panel-select__grid__item">
+            <div class="file-input">
+              <label for="file-input">
+                <div>💾</div>
+                <div>Upload State</div>
+              </label>
+              <input
+                id="file-input"
+                type="file"
+                name="image"
+                onChange={this.uploadState}
+                disabled={!WasmBoy.isReady()}
+                placeholder="Update State for current loaded ROM"
+                style="display: none;"
+              />
+            </div>
           </li>
           <li class="control-panel-select__grid__item">
             <button
