@@ -5,6 +5,7 @@ import { Pubx } from "../../../services/pubx";
 import { PUBX_CONFIG } from "../../../pubx.config";
 
 import { NOTIFICATION_MESSAGES } from "../../../notification.messages";
+import download from "../../../services/download";
 
 const packageJson = require("../../../../package.json");
 
@@ -26,7 +27,7 @@ export default class OutputStateList extends Component {
   }
 
   checkStateVersion(saveState) {
-    console.log(saveState);
+    download(saveState, saveState.date + ".json", "text/plain");
   }
 
   loadState(saveState) {
