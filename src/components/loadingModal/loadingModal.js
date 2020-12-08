@@ -9,14 +9,14 @@ export default class LoadingModal extends Component {
     this.setState({
       loading: {},
       isActiveClass: "",
-      timeout: false
+      timeout: false,
     });
   }
 
   componentDidMount() {
     const pubxLoadingSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.LOADING_KEY,
-      newState => {
+      (newState) => {
         // Preserve our old promise stack
         const oldPromiseStack = this.state.loading.promiseStack;
 
@@ -24,8 +24,8 @@ export default class LoadingModal extends Component {
           ...this.state,
           loading: {
             ...this.state.loading,
-            ...newState
-          }
+            ...newState,
+          },
         });
 
         // If we added a new promise to the stack, start loading
@@ -42,9 +42,9 @@ export default class LoadingModal extends Component {
 
     this.setState({
       loading: {
-        ...Pubx.get(PUBX_CONFIG.LOADING_KEY)
+        ...Pubx.get(PUBX_CONFIG.LOADING_KEY),
       },
-      pubxLoadingSubscriberKey
+      pubxLoadingSubscriberKey,
     });
   }
 
@@ -66,9 +66,9 @@ export default class LoadingModal extends Component {
           this.setState({
             ...this.state,
             timeout: false,
-            isActiveClass: "is-active"
+            isActiveClass: "is-active",
           });
-        }, 250)
+        }, 250),
       });
     }
 
@@ -92,7 +92,7 @@ export default class LoadingModal extends Component {
     this.setState({
       ...this.state,
       timeout: false,
-      isActiveClass: ""
+      isActiveClass: "",
     });
   }
 

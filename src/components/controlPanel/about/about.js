@@ -34,32 +34,39 @@ export default class About extends Component {
             target="_blank"
           >
             PWA
-          </a>. Vaporboy emulates ROMs using{" "}
+          </a>
+          . Vaporboy emulates ROMs using{" "}
           <a href="https://github.com/torch2424/wasmBoy" target="_blank">
             WasmBoy
-          </a>. Both VaporBoy and WasmBoy are open source under the{" "}
+          </a>
+          . Both VaporBoy and WasmBoy are open source under the{" "}
           <a
             href="https://choosealicense.com/licenses/apache-2.0/"
             target="_blank"
           >
             Apache License 2.0
-          </a>. You can fork/contribute to VaporBoy, the Preact PWA shell, at
-          the{" "}
+          </a>
+          . You can fork/contribute to VaporBoy, the Preact PWA shell, at the{" "}
           <a href="https://github.com/torch2424/vaporBoy" target="_blank">
             VaporBoy Github Repo
-          </a>. You can fork/contribute to WasmBoy, the Core Library written for
-          Web Assembly in AssemblyScript and Demo in Preact, at the{" "}
+          </a>
+          . You can fork/contribute to WasmBoy, the Core Library written for Web
+          Assembly in AssemblyScript and Demo in Preact, at the{" "}
           <a href="https://github.com/torch2424/wasmBoy" target="_blank">
             WasmBoy Github Repo
-          </a>. VaporBoy and WasmBoy were developed by{" "}
+          </a>
+          . VaporBoy and WasmBoy were developed by{" "}
           <a href="https://aaronthedev.com" target="_blank">
             Aaron Turner
-          </a>.
-          <b>VaporBoy is still in beta</b>. Please expect bugs. And check the{" "}
+          </a>
+          .<b>VaporBoy is still in beta</b>. Please expect bugs. And check the{" "}
           <b>F.A.Q</b> for where to report them.
         </p>
         <h1>Controls</h1>
-        <p>This covers the controls for desktop (keyboard) and USB / Bluetooth Gamepads. Touch Controls model the original GameBoy controls.</p>
+        <p>
+          This covers the controls for desktop (keyboard) and USB / Bluetooth
+          Gamepads. Touch Controls model the original GameBoy controls.
+        </p>
         <table>
           <tr>
             <th>Action</th>
@@ -116,7 +123,8 @@ export default class About extends Component {
               open-source community. First, I would like to suggest{" "}
               <a href="https://gbhh.avivace.com/" target="_blank">
                 Homebrew Hub by avivace
-              </a>. This site attempts to "collect, archive and save every
+              </a>
+              . This site attempts to "collect, archive and save every
               unofficial game, homebrew, patch, hackrom for Game Boy produced by
               the community through decades of passionate work". Another good
               resource is the{" "}
@@ -139,8 +147,8 @@ export default class About extends Component {
                 target="_blank"
               >
                 this stack exchange answer to be a good resource
-              </a>.
-              <b>P.S I am not a lawyer, or a legal advisor.</b>
+              </a>
+              .<b>P.S I am not a lawyer, or a legal advisor.</b>
             </p>
           </li>
 
@@ -160,7 +168,8 @@ export default class About extends Component {
               Bugs and Sugesstions can be filed at the{" "}
               <a href="https://github.com/torch2424/vaporBoy" target="_blank">
                 VaporBoy Github Repo
-              </a>.
+              </a>
+              .
             </p>
           </li>
 
@@ -170,7 +179,8 @@ export default class About extends Component {
               VaporBoy and WasmBoy were developed by{" "}
               <a href="https://aaronthedev.com" target="_blank">
                 Aaron Turner
-              </a>, and the amazing contributors on each respective repo.
+              </a>
+              , and the amazing contributors on each respective repo.
             </p>
           </li>
 
@@ -183,7 +193,8 @@ export default class About extends Component {
                 target="_blank"
               >
                 Apache License 2.0
-              </a>.
+              </a>
+              .
             </p>
           </li>
         </ul>
@@ -200,7 +211,10 @@ export default class About extends Component {
           </a>{" "}
           single core score above 1400 have the best chance of running the
           emulator at a full 60 frames per second. For improving performance,
-          check the <b>Control Panel > Configure Options > Performance</b>{" "}
+          check the{" "}
+          <b>
+            Control Panel {">"} Configure Options {">"} Performance
+          </b>{" "}
           section. There you will see options for adjusting performance, with
           detailed explanations of what each option does.
         </p>
@@ -260,9 +274,25 @@ export default class About extends Component {
         </ul>
         <h1>Analytics & Privacy</h1>
         <p>
-          Analytics is used on this application simply for performance monitoring, and tracking popularity of the applications. The following events are sent, with nothing more than the event name. The analytics provider used is <a href="https://support.google.com/analytics/answer/6004245?ref_topic=2919631" target="_blank">Google Analytics</a>. We also have a <a target="_blank" href="/assets/privacypolicy.html">Privacy Policy</a>. Which simply expands on this a little bit more.
+          Analytics is used on this application simply for performance
+          monitoring, and tracking popularity of the applications. The following
+          events are sent, with nothing more than the event name. The analytics
+          provider used is{" "}
+          <a
+            href="https://support.google.com/analytics/answer/6004245?ref_topic=2919631"
+            target="_blank"
+          >
+            Google Analytics
+          </a>
+          . We also have a{" "}
+          <a target="_blank" href="/assets/privacypolicy.html">
+            Privacy Policy
+          </a>
+          . Which simply expands on this a little bit more.
         </p>
-        <p><b>The following events are sent to the analytics provider:</b></p>
+        <p>
+          <b>The following events are sent to the analytics provider:</b>
+        </p>
         <ul>
           <li>Save State Created</li>
           <li>Homebrew ROM Loaded</li>

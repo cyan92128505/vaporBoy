@@ -33,17 +33,17 @@ export default class SettingsDisplay extends Component {
     this.setState({
       ...this.state,
       stored: {
-        ...this.props.currentSettings
+        ...this.props.currentSettings,
       },
       current: {
-        ...this.props.currentSettings
+        ...this.props.currentSettings,
       },
       confirmationModal: {
-        ...Pubx.get(PUBX_CONFIG.CONFIRMATION_MODAL_KEY)
+        ...Pubx.get(PUBX_CONFIG.CONFIRMATION_MODAL_KEY),
       },
       controlPanel: {
-        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY)
-      }
+        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY),
+      },
     });
   }
 
@@ -51,14 +51,14 @@ export default class SettingsDisplay extends Component {
     this.setState({
       ...this.state,
       stored: {
-        ...this.props.currentSettings
-      }
+        ...this.props.currentSettings,
+      },
     });
   }
 
   updateSetting(event, settingKey, setting) {
     const current = {
-      ...this.state.current
+      ...this.state.current,
     };
 
     if (setting.type === "integer") {
@@ -70,15 +70,15 @@ export default class SettingsDisplay extends Component {
     this.setState({
       ...this.state,
       current: {
-        ...current
-      }
+        ...current,
+      },
     });
   }
 
   showSettingInfo(setting) {
     this.state.confirmationModal.showConfirmationModal({
       title: setting.name,
-      contentElement: setting.descriptionElement
+      contentElement: setting.descriptionElement,
     });
   }
 
@@ -121,13 +121,13 @@ export default class SettingsDisplay extends Component {
         };
 
         // Run the task
-        resetSettingsTask().catch(error => {
+        resetSettingsTask().catch((error) => {
           console.error(error);
           Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
             NOTIFICATION_MESSAGES.ERROR_RESET_SETTINGS
           );
         });
-      }
+      },
     });
   }
 
@@ -169,13 +169,13 @@ export default class SettingsDisplay extends Component {
         };
 
         // Run the task
-        applyOptionsTask().catch(error => {
+        applyOptionsTask().catch((error) => {
           console.error(error);
           Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
             NOTIFICATION_MESSAGES.ERROR_APPLY_SETTINGS
           );
         });
-      }
+      },
     });
   }
 
@@ -189,7 +189,7 @@ export default class SettingsDisplay extends Component {
     }
 
     const settingsSections = [];
-    Object.keys(this.props.settingsSections).forEach(sectionKey => {
+    Object.keys(this.props.settingsSections).forEach((sectionKey) => {
       // Get our section
       const section = this.props.settingsSections[sectionKey];
 
@@ -204,7 +204,7 @@ export default class SettingsDisplay extends Component {
         </div>
       );
 
-      Object.keys(section.settings).forEach(settingKey => {
+      Object.keys(section.settings).forEach((settingKey) => {
         // Get our setting
         const setting = section.settings[settingKey];
 
@@ -217,7 +217,7 @@ export default class SettingsDisplay extends Component {
                 <input
                   type="checkbox"
                   checked={this.state.current[settingKey]}
-                  onChange={event =>
+                  onChange={(event) =>
                     this.updateSetting(event, settingKey, setting)
                   }
                   aria-label={setting.name}
@@ -239,7 +239,7 @@ export default class SettingsDisplay extends Component {
                 min={setting.min}
                 max={setting.max}
                 value={this.state.current[settingKey]}
-                onChange={event =>
+                onChange={(event) =>
                   this.updateSetting(event, settingKey, setting)
                 }
                 aria-label={setting.name}

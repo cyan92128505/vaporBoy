@@ -8,27 +8,27 @@ export default class ManualInput extends Component {
     super();
     this.setState({
       ROMScraper: {
-        ...Pubx.get(PUBX_CONFIG.ROM_SCRAPER_KEY)
-      }
+        ...Pubx.get(PUBX_CONFIG.ROM_SCRAPER_KEY),
+      },
     });
   }
 
   componentDidMount() {
     const pubxROMScraperSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.ROM_SCRAPER_KEY,
-      newState => {
+      (newState) => {
         this.setState({
           ...this.state,
           ROMScraper: {
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
 
     this.setState({
       ...this.state,
-      pubxROMScraperSubscriberKey: pubxROMScraperSubscriberKey
+      pubxROMScraperSubscriberKey: pubxROMScraperSubscriberKey,
     });
   }
 
@@ -48,12 +48,12 @@ export default class ManualInput extends Component {
     // Convert image to data url
     const fileReader = new FileReader();
 
-    fileReader.onload = onloadEvent => {
+    fileReader.onload = (onloadEvent) => {
       Pubx.publish(PUBX_CONFIG.ROM_SCRAPER_KEY, {
         ROMInfo: {
           ...Pubx.get(PUBX_CONFIG.ROM_SCRAPER_KEY).ROMInfo,
-          imageDataURL: onloadEvent.target.result
-        }
+          imageDataURL: onloadEvent.target.result,
+        },
       });
     };
 
@@ -74,7 +74,7 @@ export default class ManualInput extends Component {
           class="hidden"
           accept="image/*"
           value={undefined}
-          onChange={event => {
+          onChange={(event) => {
             this.loadLocalFile(event);
           }}
         />
@@ -91,12 +91,12 @@ export default class ManualInput extends Component {
             placeholder="Title"
             aria-label="ROM title"
             value={this.state.ROMScraper.ROMInfo.title}
-            onChange={e =>
+            onChange={(e) =>
               Pubx.publish(PUBX_CONFIG.ROM_SCRAPER_KEY, {
                 ROMInfo: {
                   ...Pubx.get(PUBX_CONFIG.ROM_SCRAPER_KEY).ROMInfo,
-                  title: event.target.value
-                }
+                  title: event.target.value,
+                },
               })
             }
           />

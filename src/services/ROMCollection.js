@@ -46,7 +46,7 @@ class ROMCollectionService {
     const getCollectionTask = async () => {
       const collection = await this.getCollection();
       Pubx.publish(PUBX_CONFIG.ROM_COLLECTION_KEY, {
-        collection
+        collection,
       });
     };
 
@@ -57,12 +57,12 @@ class ROMCollectionService {
       }
 
       WasmBoy.getSaveStates()
-        .then(saveStates => {
+        .then((saveStates) => {
           Pubx.publish(PUBX_CONFIG.SAVES_STATES_KEY, {
-            saveStates
+            saveStates,
           });
         })
-        .catch(error => {
+        .catch((error) => {
           // TODO: Unhide this error when no save states
           /*
           console.error(error);
@@ -95,7 +95,7 @@ class ROMCollectionService {
         imageAsDataURL: imageDataURL,
         CGBFlag: cartridgeInfo.CGBFlag,
         SGBFlag: cartridgeInfo.SGBFlag,
-        vaporBoyVersion: packageJson.version
+        vaporBoyVersion: packageJson.version,
       };
 
       await this._setCollection(collectionObject);

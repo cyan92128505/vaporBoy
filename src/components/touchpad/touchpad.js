@@ -21,13 +21,13 @@ export default class Touchpad extends Component {
   toggleExpand() {
     const pubxLayoutState = Pubx.get(PUBX_CONFIG.LAYOUT_KEY);
     Pubx.publish(PUBX_CONFIG.LAYOUT_KEY, {
-      expanded: !pubxLayoutState.expanded
+      expanded: !pubxLayoutState.expanded,
     });
   }
 
   showControlPanel() {
     Pubx.publish(PUBX_CONFIG.CONTROL_PANEL_KEY, {
-      show: true
+      show: true,
     });
     // Calling resume Audio Context here, as it is always touched on mobile
     WasmBoy.resumeAudioContext();

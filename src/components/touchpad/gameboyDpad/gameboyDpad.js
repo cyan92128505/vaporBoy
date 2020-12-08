@@ -15,9 +15,9 @@ const GRADIENTS = {
     GBC_STOP_COLORS: ["#494f54", "#212931"],
     EXPANDED_STOP_COLORS: [
       "rgba(255, 255, 255, 0.5)",
-      "rgba(255, 255, 255, 0.5)"
+      "rgba(255, 255, 255, 0.5)",
     ],
-    EXPANDED_SAFARI_STOP_OPACITY: ["0.5", "0.5"]
+    EXPANDED_SAFARI_STOP_OPACITY: ["0.5", "0.5"],
   },
   BUTTON_TRIANGLE_FILL_UP: {
     ID: "ButtonTriangleFillUp",
@@ -25,9 +25,9 @@ const GRADIENTS = {
     GBC_STOP_COLORS: ["#494f54", "#212931"],
     EXPANDED_STOP_COLORS: [
       "rgba(175, 175, 175, 0.25)",
-      "rgba(175, 175, 175, 0.25)"
+      "rgba(175, 175, 175, 0.25)",
     ],
-    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25"]
+    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25"],
   },
   BUTTON_TRIANGLE_FILL_DOWN: {
     ID: "ButtonTriangleFillDown",
@@ -35,9 +35,9 @@ const GRADIENTS = {
     GBC_STOP_COLORS: ["#494f54", "#212931"],
     EXPANDED_STOP_COLORS: [
       "rgba(175, 175, 175, 0.25)",
-      "rgba(175, 175, 175, 0.25)"
+      "rgba(175, 175, 175, 0.25)",
     ],
-    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25"]
+    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25"],
   },
   BUTTON_TRIANGLE_FILL_HORIZONTAL: {
     ID: "ButtonTriangleFillHorizontal",
@@ -46,10 +46,10 @@ const GRADIENTS = {
     EXPANDED_STOP_COLORS: [
       "rgba(175, 175, 175, 0.25)",
       "rgba(175, 175, 175, 0.25)",
-      "rgba(175, 175, 175, 0.25)"
+      "rgba(175, 175, 175, 0.25)",
     ],
     EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25", "0.25"],
-    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25", "0.25"]
+    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25", "0.25"],
   },
   BUTTON_TRIANGLE_STROKE: {
     ID: "ButtonTriangleStroke",
@@ -58,10 +58,10 @@ const GRADIENTS = {
     EXPANDED_STOP_COLORS: [
       "rgba(175, 175, 175, 0.25)",
       "rgba(175, 175, 175, 0.25)",
-      "rgba(175, 175, 175, 0.25)"
+      "rgba(175, 175, 175, 0.25)",
     ],
-    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25", "0.25"]
-  }
+    EXPANDED_SAFARI_STOP_OPACITY: ["0.25", "0.25", "0.25"],
+  },
 };
 
 const getStopColor = (gradientObject, stopColorIndex, isGbc, isExpanded) => {
@@ -95,7 +95,7 @@ export default class GameboyDpad extends Component {
 
     this.setState({
       ...this.state,
-      elementId: getInputId()
+      elementId: getInputId(),
     });
   }
 
@@ -103,16 +103,19 @@ export default class GameboyDpad extends Component {
     const pubxLayoutState = Pubx.get(PUBX_CONFIG.LAYOUT_KEY);
 
     const touchElement = document.getElementById(this.state.elementId);
-    const removeTouchInput = WasmBoy.ResponsiveGamepad.TouchInput.addDpadInput(touchElement, {
-      allowMultipleDirections: false
-    });
+    const removeTouchInput = WasmBoy.ResponsiveGamepad.TouchInput.addDpadInput(
+      touchElement,
+      {
+        allowMultipleDirections: false,
+      }
+    );
 
     this.setState({
       ...this.state,
       layout: {
-        ...pubxLayoutState
+        ...pubxLayoutState,
       },
-      removeTouchInput
+      removeTouchInput,
     });
   }
 

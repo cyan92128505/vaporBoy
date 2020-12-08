@@ -21,7 +21,7 @@ export const AVAILABLE_GAMES = [
           </li>
         </ul>
       </div>
-    )
+    ),
   },
   {
     title: "uCity",
@@ -43,7 +43,7 @@ export const AVAILABLE_GAMES = [
           </li>
         </ul>
       </div>
-    )
+    ),
   },
   {
     title: "Geometrix",
@@ -65,6 +65,6 @@ export const AVAILABLE_GAMES = [
           </li>
         </ul>
       </div>
-    )
-  }
+    ),
+  },
 ];

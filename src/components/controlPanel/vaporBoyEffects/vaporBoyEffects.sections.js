@@ -13,9 +13,9 @@ export const VAPORBOY_EFFECTS_SECTIONS = {
             This will add some <i>A E S T H E T I C</i> to any ROM.
           </div>
         ),
-        type: "boolean"
-      }
-    }
+        type: "boolean",
+      },
+    },
   },
   audio: {
     name: "Audio",
@@ -26,9 +26,9 @@ export const VAPORBOY_EFFECTS_SECTIONS = {
       bassBoost: {
         name: "Bass Boost",
         descriptionElement: <div>Bass Boost all ROM audio Output.</div>,
-        type: "boolean"
-      }
-    }
+        type: "boolean",
+      },
+    },
   },
   video: {
     name: "Video",
@@ -41,7 +41,7 @@ export const VAPORBOY_EFFECTS_SECTIONS = {
         descriptionElement: (
           <div>Add a CRT like effect to the video output element.</div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       monochrome: {
         name: "Monochrome Palette",
@@ -51,14 +51,14 @@ export const VAPORBOY_EFFECTS_SECTIONS = {
             Gameboy Color games will render in black and white.
           </div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       inverted: {
         name: "Inverted Palette",
         descriptionElement: (
           <div>Invert the colors of the output video of the ROM.</div>
         ),
-        type: "boolean"
+        type: "boolean",
       },
       rainbow: {
         name: "Rainbow Pallete",
@@ -68,8 +68,8 @@ export const VAPORBOY_EFFECTS_SECTIONS = {
             value. Essentially adds a rainbow static to the video output.
           </div>
         ),
-        type: "boolean"
-      }
-    }
-  }
+        type: "boolean",
+      },
+    },
+  },
 };

@@ -17,31 +17,31 @@ export default class ROMScraper extends Component {
 
     this.setState({
       ROMScraper: {
-        ...Pubx.get(PUBX_CONFIG.ROM_SCRAPER_KEY)
+        ...Pubx.get(PUBX_CONFIG.ROM_SCRAPER_KEY),
       },
       controlPanel: {
-        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY)
+        ...Pubx.get(PUBX_CONFIG.CONTROL_PANEL_KEY),
       },
-      submitting: false
+      submitting: false,
     });
   }
 
   componentDidMount() {
     const pubxROMScraperSubscriberKey = Pubx.subscribe(
       PUBX_CONFIG.ROM_SCRAPER_KEY,
-      newState => {
+      (newState) => {
         this.setState({
           ...this.state,
           ROMScraper: {
-            ...newState
-          }
+            ...newState,
+          },
         });
       }
     );
 
     this.setState({
       ...this.state,
-      pubxROMScraperSubscriberKey: pubxROMScraperSubscriberKey
+      pubxROMScraperSubscriberKey: pubxROMScraperSubscriberKey,
     });
   }
 
@@ -56,7 +56,7 @@ export default class ROMScraper extends Component {
   setActiveTabIndex(activeTabIndex) {
     Pubx.publish(PUBX_CONFIG.ROM_SCRAPER_KEY, {
       activeTabIndex: activeTabIndex,
-      ROMInfo: {}
+      ROMInfo: {},
     });
   }
 
@@ -80,7 +80,7 @@ export default class ROMScraper extends Component {
       this.state.controlPanel.hideControlPanel();
     };
     const playROMPromise = playROMTask();
-    playROMPromise.catch(error => {
+    playROMPromise.catch((error) => {
       console.error(error);
       Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
         NOTIFICATION_MESSAGES.ERROR_LOAD_ROM
@@ -107,7 +107,7 @@ export default class ROMScraper extends Component {
       this.state.controlPanel.hideControlPanel();
     };
     const addROMToCollectionPromise = addROMToCollectionTask();
-    addROMToCollectionPromise.catch(error => {
+    addROMToCollectionPromise.catch((error) => {
       console.error(error);
       Pubx.get(PUBX_CONFIG.NOTIFICATION_KEY).showNotification(
         NOTIFICATION_MESSAGES.ERROR_ADD_ROM_TO_COLLECTION

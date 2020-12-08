@@ -10,7 +10,7 @@ export const VAPORBOY_DEFAULT_EFFECTS = {
   monochrome: false,
   inverted: false,
   rainbow: false,
-  crt: false
+  crt: false,
 };
 
 // Audio nodes and things
@@ -34,7 +34,7 @@ export const vaporAudioEffect = (audioContext, audioBufferSourceNode) => {
       wetLevel: 0.5, //0 to 1
       feedback: 0.3, //0 to 1
       delayTimeLeft: 150, //1 to 10000 (milliseconds)
-      delayTimeRight: 200 //1 to 10000 (milliseconds)
+      delayTimeRight: 200, //1 to 10000 (milliseconds)
     });
   }
 
@@ -45,7 +45,7 @@ export const vaporAudioEffect = (audioContext, audioBufferSourceNode) => {
 };
 
 // Audio/Video Effects
-export const vaporVideoEffect = imageDataArray => {
+export const vaporVideoEffect = (imageDataArray) => {
   // Tint multiplier
   const purpleTint = 2.75;
 
@@ -84,7 +84,7 @@ export const bassBoostEffect = (audioContext, audioBufferSourceNode) => {
 
 // Video Effects
 // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Pixel_manipulation_with_canvas
-export const monochromeEffect = imageDataArray => {
+export const monochromeEffect = (imageDataArray) => {
   for (let i = 0; i < imageDataArray.length; i += 4) {
     const averageColorValue =
       (imageDataArray[i] + imageDataArray[i + 1] + imageDataArray[i + 2]) / 3;
@@ -94,7 +94,7 @@ export const monochromeEffect = imageDataArray => {
   }
 };
 
-export const invertedEffect = imageDataArray => {
+export const invertedEffect = (imageDataArray) => {
   for (let i = 0; i < imageDataArray.length; i += 4) {
     imageDataArray[i] = 255 - imageDataArray[i];
     imageDataArray[i + 1] = 255 - imageDataArray[i + 1];
@@ -102,7 +102,7 @@ export const invertedEffect = imageDataArray => {
   }
 };
 
-export const rainbowEffect = imageDataArray => {
+export const rainbowEffect = (imageDataArray) => {
   for (let i = 0; i < imageDataArray.length; i += 4) {
     const averageColorValue =
       (imageDataArray[i] + imageDataArray[i + 1] + imageDataArray[i + 2]) / 3;
