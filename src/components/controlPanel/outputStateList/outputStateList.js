@@ -1,6 +1,5 @@
 import { Component } from "preact";
 import { WasmBoy } from "wasmboy";
-import FileSaver from "file-saver";
 
 import { Pubx } from "../../../services/pubx";
 import { PUBX_CONFIG } from "../../../pubx.config";
@@ -26,15 +25,18 @@ export default class OutputStateList extends Component {
     });
   }
 
-  checkStateVersion(saveState) {
-    FileSaver.saveAs(
-      JSON.stringify(saveState),
+  getStateName(saveState) {
+    return (
       packageJson.displayName +
-        packageJson.version +
-        "-" +
-        saveState.date +
-        ".json"
+      packageJson.version +
+      "-" +
+      saveState.date +
+      ".json"
     );
+  }
+
+  getStateContent(saveState) {
+    return "data:text/json;," + JSON.stringify(saveState);
   }
 
   loadState(saveState) {
@@ -98,8 +100,10 @@ export default class OutputStateList extends Component {
 
         saveStates.push(
           <li>
-            <button
-              onClick={() => this.checkStateVersion(saveState)}
+            <a
+              download={this.getStateName(saveState)}
+              href={this.getStateContent(saveState)}
+              style="-webkit-appearance:button;color:black;text-decoration:none"
               aria-label={`Load Save State from ${saveStateDate.toLocaleString()}`}
             >
               <div>
@@ -108,7 +112,7 @@ export default class OutputStateList extends Component {
               <div>Date: {saveStateDate.toLocaleString()}</div>
               <div>isAuto: {saveState.isAuto.toString()}</div>
               {saveStateVersionElement}
-            </button>
+            </a>
           </li>
         );
       });
