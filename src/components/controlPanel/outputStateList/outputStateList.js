@@ -27,7 +27,11 @@ export default class OutputStateList extends Component {
   }
 
   checkStateVersion(saveState) {
-    download(saveState, saveState.date + ".json", "text/plain");
+    download(
+      JSON.stringify(saveState),
+      saveState.date + ".json",
+      "application/json"
+    );
   }
 
   loadState(saveState) {
