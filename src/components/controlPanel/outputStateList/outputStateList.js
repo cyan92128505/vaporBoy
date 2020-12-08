@@ -30,7 +30,7 @@ export default class OutputStateList extends Component {
     download(
       JSON.stringify(saveState),
       saveState.date + ".json",
-      "application/json"
+      "application/octet-stream"
     );
   }
 
